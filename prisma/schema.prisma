@@ -11,15 +11,16 @@ datasource db {
 }
 
 model Squad {
-  id             String     @id @default(uuid())
-  name           String     @unique
+  id             String   @id @default(uuid())
+  name           String   @unique
   productManager String
   techManager    String
   initialTime    DateTime
   description    String
   members        String[]
   CreatedAt      DateTime
-  Tutorial       Tutorial[]
+
+  tutorial Tutorial[]
 }
 
 model Tutorial {
@@ -35,10 +36,10 @@ model Tutorial {
   created_at    DateTime
   tutorial_tipe Int
 
-  id_squad Squad[]
+  Squad   Squad?  @relation(fields: [squadId], references: [id])
+  squadId String?
 
-  id_activities       Activity[]
-  TutorialsActivities TutorialsActivities[]
+  activity Activity[]
 }
 
 model Activity {
@@ -52,16 +53,6 @@ model Activity {
   baddge      String
   created_at  DateTime
 
-  id_tutorial         Tutorial[]
-  TutorialsActivities TutorialsActivities[]
-}
-
-model TutorialsActivities {
-  activity   Activity @relation(fields: [activityId], references: [id])
-  activityId String
-
-  tutorial   Tutorial @relation(fields: [tutorialId], references: [id])
-  tutorialId String
-
-  @@id([activityId, tutorialId])
+  Tutorial   Tutorial? @relation(fields: [tutorialId], references: [id])
+  tutorialId String?
 }
