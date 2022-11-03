@@ -11,17 +11,34 @@ datasource db {
 }
 
 model Squad {
-  id String @id @default(uuid())
+  id             String   @id @default(uuid())
+  productManager String
+  techManager    String
+  initialTime    DateTime
+  description    String
+  members        String[]
 }
 
 model Tutorial {
-  id String @id @default(uuid())
+  id       String @id @default(uuid())
+  url      String
+  progress Int
+  titulo   String
 }
 
 model Activities {
-  id String @id @default(uuid())
+  id          String   @id @default(uuid())
+  description String
+  options     String[]
+  answer      String
+  image       String
+  baddge      String
 }
 
 model Article {
-  id String @id @default(uuid())
+  id          String @id @default(uuid())
+  image       String
+  description String
+  outsideUrl  String
+  title       String
 }
