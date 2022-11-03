@@ -37,7 +37,8 @@ model Tutorial {
 
   id_squad Squad[]
 
-  id_activities Activity[]
+  id_activities       Activity[]
+  TutorialsActivities TutorialsActivities[]
 }
 
 model Activity {
@@ -51,5 +52,16 @@ model Activity {
   baddge      String
   created_at  DateTime
 
-  id_tutorial Tutorial[]
+  id_tutorial         Tutorial[]
+  TutorialsActivities TutorialsActivities[]
+}
+
+model TutorialsActivities {
+  activity   Activity @relation(fields: [activityId], references: [id])
+  activityId String
+
+  tutorial   Tutorial @relation(fields: [tutorialId], references: [id])
+  tutorialId String
+
+  @@id([activityId, tutorialId])
 }
