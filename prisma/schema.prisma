@@ -11,17 +11,48 @@ datasource db {
 }
 
 model Squad {
-  id String @id @default(uuid())
+  id             String   @id @default(uuid())
+  name           String   @unique
+  productManager String
+  techManager    String
+  initialTime    DateTime
+  description    String
+  members        String[]
+  CreatedAt      DateTime
+
+  tutorial Tutorial[]
 }
 
 model Tutorial {
-  id String @id @default(uuid())
+  id            String   @id @default(uuid())
+  title         String
+  urlVideo      String
+  progress      Int
+  titleVideo    String
+  description   String
+  image_url     String
+  outside_url   String
+  image_title   String
+  created_at    DateTime
+  tutorial_tipe Int
+
+  Squad   Squad?  @relation(fields: [squadId], references: [id])
+  squadId String?
+
+  activity Activity[]
 }
 
-model Activities {
-  id String @id @default(uuid())
-}
+model Activity {
+  id          String   @id @default(uuid())
+  description String
+  title       String
+  options     String[]
+  answer      String
+  image_title String
+  image_url   String
+  baddge      String
+  created_at  DateTime
 
-model Article {
-  id String @id @default(uuid())
+  Tutorial   Tutorial? @relation(fields: [tutorialId], references: [id])
+  tutorialId String?
 }
