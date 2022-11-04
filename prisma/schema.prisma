@@ -11,20 +11,21 @@ datasource db {
 }
 
 model Squad {
-  id             String   @id @default(uuid())
-  name           String   @unique
-  productManager String
-  techManager    String
-  initialTime    DateTime
-  description    String
-  members        String[]
-  CreatedAt      DateTime
+  id              String    @id @default(uuid())
+  name            String    @unique
+  product_manager String
+  techManager     String
+  initialTime     DateTime
+  description     String
+  members         String[]
+  created_at      DateTime
+  updated_at      DateTime?
 
   tutorial Tutorial[]
 }
 
 model Tutorial {
-  id            String   @id @default(uuid())
+  id            String    @id @default(uuid())
   title         String
   urlVideo      String
   progress      Int
@@ -35,24 +36,26 @@ model Tutorial {
   image_title   String
   created_at    DateTime
   tutorial_tipe Int
+  updated_at    DateTime?
 
-  Squad   Squad?  @relation(fields: [squadId], references: [id])
-  squadId String?
+  Squad    Squad?  @relation(fields: [squad_id], references: [id])
+  squad_id String?
 
   activity Activity[]
 }
 
 model Activity {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   description String
   title       String
   options     String[]
   answer      String
   image_title String
   image_url   String
-  baddge      String
+  badge       String
   created_at  DateTime
+  updated_at  DateTime?
 
-  Tutorial   Tutorial? @relation(fields: [tutorialId], references: [id])
-  tutorialId String?
+  Tutorial    Tutorial? @relation(fields: [tutorial_id], references: [id])
+  tutorial_id String?
 }

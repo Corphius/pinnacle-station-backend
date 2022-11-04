@@ -1,3 +1,27 @@
-class Tutorial {}
+import { v4 as uuid } from 'uuid';
+
+class Tutorial {
+  id: string;
+  squad_id?: string;
+  title: string;
+  urlVideo: string;
+  progress: number;
+  titleVideo: string;
+  description: string;
+  image_url: string;
+  outside_url: string;
+  image_title: string;
+  created_at: Date;
+  tutorial_tipe: number;
+  updated_at?: Date;
+
+  constructor(props: Omit<Tutorial, 'id' | 'created_at'>, id?: string) {
+    Object.assign(this, props);
+
+    if (!id) {
+      this.id = uuid();
+    }
+  }
+}
 
 export { Tutorial };
