@@ -15,7 +15,7 @@ class SquadCreateDTO {
 
   @IsNotEmpty()
   @IsDate()
-  initialTime: Date;
+  initial_time: Date;
 
   @IsNotEmpty()
   @IsString()
