@@ -16,7 +16,7 @@ class SquadRepository implements ISquadRepository {
   getById(id: string): Promise<SquadModel> {
     return this.prismaConfig.squad.findUnique({ where: { id: id } });
   }
-  deleteById(id: string): void {
+  deleteById(id: string) {
     return this.prismaConfig.squad.delete({ where: { id: id } });
   }
 }

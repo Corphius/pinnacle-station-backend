@@ -15,10 +15,10 @@ model Squad {
   name            String    @unique
   product_manager String
   tech_manager    String
-  initial_time     DateTime
+  initial_time    DateTime?
   description     String
   members         String[]
-  created_at      DateTime
+  created_at      DateTime?
   updated_at      DateTime?
 
   tutorial Tutorial[]

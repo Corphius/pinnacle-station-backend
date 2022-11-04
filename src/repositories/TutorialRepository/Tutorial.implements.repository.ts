@@ -14,7 +14,7 @@ class TutorialRepository implements ITutorialRepository {
   getById(id: string): Promise<TutorialModel> {
     return this.prismaConfig.tutorial.findUnique({ where: { id: id } });
   }
-  deleteById(id: string): void {
+  deleteById(id: string) {
     return this.prismaConfig.tutorial.delete({ where: { id: id } });
   }
 }

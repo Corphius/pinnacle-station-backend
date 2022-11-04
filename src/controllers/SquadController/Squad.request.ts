@@ -1,6 +1,6 @@
-import { IsNotEmpty, IsNumber, IsString, IsDate } from 'class-validator';
+import { IsDate, IsNotEmpty, IsString } from 'class-validator';
 
-class SquadCreateDTO {
+class SquadREQUESTCreate {
   @IsNotEmpty()
   @IsString()
   name: string;
@@ -22,4 +22,4 @@ class SquadCreateDTO {
   members: string[];
 }
 
-export { SquadCreateDTO };
+export { SquadREQUESTCreate };

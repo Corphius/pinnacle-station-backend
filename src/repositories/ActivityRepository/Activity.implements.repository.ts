@@ -11,10 +11,10 @@ class ActivityRepository implements IActivityRepository {
     return this.prismaConfig.activity.findMany({ where: filters });
   }
   getById(id: string): Promise<ActivityModel> {
-    return this.prismaConfig.squad.findUnique({ where: { id: id } });
+    return this.prismaConfig.activity.findUnique({ where: { id: id } });
   }
-  deleteById(id: string): void {
-    return this.prismaConfig.squad.delete({ where: { id: id } });
+  deleteById(id: string) {
+    return this.prismaConfig.activity.delete({ where: { id: id } });
   }
 }
 

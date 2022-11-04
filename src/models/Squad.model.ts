@@ -5,10 +5,10 @@ class SquadModel {
   name: string;
   product_manager: string;
   tech_manager: string;
-  initial_time: Date;
+  initial_time?: Date;
   description: string;
   members: string[];
-  created_at: Date;
+  created_at?: Date;
   updated_at?: Date;
 
   constructor(props: Omit<SquadModel, 'id' | 'created_at'>, id?: string) {
@@ -16,6 +16,7 @@ class SquadModel {
 
     if (!id) {
       this.id = uuid();
+      this.created_at = new Date();
     }
   }
 }
