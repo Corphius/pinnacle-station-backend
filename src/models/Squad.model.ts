@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-class Squad {
+class SquadModel {
   id: string;
   name: string;
   product_manager: string;
@@ -11,7 +11,7 @@ class Squad {
   created_at: Date;
   updated_at?: Date;
 
-  constructor(props: Omit<Squad, 'id' | 'created_at'>, id?: string) {
+  constructor(props: Omit<SquadModel, 'id' | 'created_at'>, id?: string) {
     Object.assign(this, props);
 
     if (!id) {
@@ -20,4 +20,4 @@ class Squad {
   }
 }
 
-export { Squad };
+export { SquadModel };

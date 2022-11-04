@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-class Tutorial {
+class TutorialModel {
   id: string;
   squad_id?: string;
   title: string;
@@ -15,7 +15,7 @@ class Tutorial {
   tutorial_tipe: number;
   updated_at?: Date;
 
-  constructor(props: Omit<Tutorial, 'id' | 'created_at'>, id?: string) {
+  constructor(props: Omit<TutorialModel, 'id' | 'created_at'>, id?: string) {
     Object.assign(this, props);
 
     if (!id) {
@@ -24,4 +24,4 @@ class Tutorial {
   }
 }
 
-export { Tutorial };
+export { TutorialModel };
