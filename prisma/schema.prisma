@@ -14,8 +14,8 @@ model Squad {
   id              String    @id @default(uuid())
   name            String    @unique
   product_manager String
-  techManager     String
-  initialTime     DateTime
+  tech_manager    String
+  initial_time     DateTime
   description     String
   members         String[]
   created_at      DateTime

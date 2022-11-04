@@ -5,7 +5,7 @@ class SquadModel {
   name: string;
   product_manager: string;
   tech_manager: string;
-  initialTime: Date;
+  initial_time: Date;
   description: string;
   members: string[];
   created_at: Date;
