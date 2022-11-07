@@ -12,7 +12,7 @@ class TutorialModel {
   outside_url: string;
   image_title: string;
   created_at: Date;
-  tutorial_tipe: number;
+  tutorial_type: number;
   updated_at?: Date;
 
   constructor(props: Omit<TutorialModel, 'id' | 'created_at'>, id?: string) {

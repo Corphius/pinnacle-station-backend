@@ -39,7 +39,7 @@ class TutorialCreateDTO {
 
   @IsNotEmpty()
   @IsNumber()
-  tutorial_tipe: number;
+  tutorial_type: number;
 }
 
 export { TutorialCreateDTO };

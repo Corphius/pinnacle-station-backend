@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaConfig } from 'src/databaseORM/prisma.config';
+import { SquadUpdateDTO } from 'src/dtos/Squad/Squad.update.dto';
 import { SquadModel } from '../../models/Squad.model';
 import { ISquadRepository } from './Squad.interface.repository';
 
@@ -9,6 +10,15 @@ class SquadRepository implements ISquadRepository {
 
   create(data: SquadModel): Promise<SquadModel> {
     return this.prismaConfig.squad.create({ data: data });
+  }
+  updateById(id: string, squadUpdateDTO: SquadUpdateDTO): Promise<SquadModel> {
+    return this.prismaConfig.squad.update({
+      where: { id: id },
+      data: {
+        updated_at: new Date(),
+        ...squadUpdateDTO,
+      },
+    });
   }
   getAllRegisters(filters?: object): Promise<SquadModel[]> {
     return this.prismaConfig.squad.findMany({ where: filters });

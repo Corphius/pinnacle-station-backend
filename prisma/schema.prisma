@@ -35,7 +35,7 @@ model Tutorial {
   outside_url   String
   image_title   String
   created_at    DateTime
-  tutorial_tipe Int
+  tutorial_type Int
   updated_at    DateTime?
 
   Squad    Squad?  @relation(fields: [squad_id], references: [id])

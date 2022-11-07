@@ -6,9 +6,10 @@ import {
   HttpCode,
   Param,
   Post,
+  Put,
 } from '@nestjs/common';
 import { SquadService } from 'src/services/Squad.service';
-import { SquadREQUESTCreate } from './Squad.request';
+import { SquadREQUESTCreate, SquadREQUESTUpdate } from './Squad.request';
 
 @Controller('/squad')
 class SquadController {
@@ -18,6 +19,14 @@ class SquadController {
   @HttpCode(201)
   async create(@Body() body: SquadREQUESTCreate) {
     return await this.squadService.create(body);
+  }
+
+  @Put(':id')
+  async updateEntityById(
+    @Param('id') id: string,
+    @Body() body: SquadREQUESTUpdate,
+  ) {
+    return await this.squadService.update({ id, ...body });
   }
 
   @Get('/')

@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { SquadCreateDTO } from 'src/dtos/Squad/Squad.create.dto';
+import { SquadUpdateDTO } from 'src/dtos/Squad/Squad.update.dto';
 import { GenericException } from 'src/exceptions/Generic.exception';
 import { ServiceException } from 'src/exceptions/Service.exception';
 import { ISquadRepository } from 'src/repositories/SquadRepository/Squad.interface.repository';
@@ -19,6 +20,19 @@ class SquadService implements IserviceCRUD {
       // fazer validações.
       return await this.squadRepository.create(
         createSquadDTOforModel(squadCreateDTO),
+      );
+    } catch (error) {
+      console.log(error);
+      if (error instanceof GenericException) throw error;
+      throw new ServiceException(this.SERVICE_NAME);
+    }
+  }
+
+  async update(squadUpdateDTO: SquadUpdateDTO) {
+    try {
+      return await this.squadRepository.updateById(
+        squadUpdateDTO.id,
+        squadUpdateDTO,
       );
     } catch (error) {
       console.log(error);
