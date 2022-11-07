@@ -1,11 +1,25 @@
 import { PrismaConfig } from 'src/databaseORM/prisma.config';
+import { ActivitiesUpdateDTO } from 'src/dtos/Activities/Activities.update.dto';
 import { ActivityModel } from 'src/models/Activities.model';
 import { IActivityRepository } from './Activity.interface.repository';
 
 class ActivityRepository implements IActivityRepository {
   constructor(private prismaConfig: PrismaConfig) {}
+
   create(data: ActivityModel): Promise<ActivityModel> {
     return this.prismaConfig.activity.create({ data: data });
+  }
+  updateById(
+    id: string,
+    activityUpdateDTO: ActivitiesUpdateDTO,
+  ): Promise<ActivityModel> {
+    return this.prismaConfig.activity.update({
+      where: { id: id },
+      data: {
+        updated_at: new Date(),
+        ...activityUpdateDTO,
+      },
+    });
   }
   getAllRegisters(filters?: object): Promise<ActivityModel[]> {
     return this.prismaConfig.activity.findMany({ where: filters });

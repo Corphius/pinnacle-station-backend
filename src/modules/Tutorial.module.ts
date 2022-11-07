@@ -8,7 +8,7 @@ import { TutorialService } from 'src/services/Tutorial.service';
   controllers: [TutorialController],
   providers: [
     TutorialService,
-    { provide: 'ISquadRepository', useClass: TutorialRepository },
+    { provide: 'ITutorialRepository', useClass: TutorialRepository },
   ],
 })
-export class SquadModule {}
+export class TutorialModule {}
