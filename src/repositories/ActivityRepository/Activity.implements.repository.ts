@@ -1,8 +1,10 @@
+import { Injectable } from '@nestjs/common';
 import { PrismaConfig } from 'src/databaseORM/prisma.config';
 import { ActivitiesUpdateDTO } from 'src/dtos/Activities/Activities.update.dto';
 import { ActivityModel } from 'src/models/Activities.model';
 import { IActivityRepository } from './Activity.interface.repository';
 
+@Injectable()
 class ActivityRepository implements IActivityRepository {
   constructor(private prismaConfig: PrismaConfig) {}
 

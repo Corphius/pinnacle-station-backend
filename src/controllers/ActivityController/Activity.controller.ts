@@ -14,7 +14,7 @@ import {
   ActivityREQUESTUpdate,
 } from './Activity.request';
 
-@Controller('/squad')
+@Controller('/activity')
 class ActivityController {
   constructor(private activityService: ActivityService) {}
 

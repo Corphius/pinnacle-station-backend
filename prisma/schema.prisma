@@ -34,7 +34,7 @@ model Tutorial {
   image_url     String
   outside_url   String
   image_title   String
-  created_at    DateTime
+  created_at    DateTime?
   tutorial_type Int
   updated_at    DateTime?
 
@@ -53,7 +53,7 @@ model Activity {
   image_title String
   image_url   String
   badge       String
-  created_at  DateTime
+  created_at  DateTime?
   updated_at  DateTime?
 
   Tutorial    Tutorial? @relation(fields: [tutorial_id], references: [id])

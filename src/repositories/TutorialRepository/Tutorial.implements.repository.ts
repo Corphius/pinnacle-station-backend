@@ -1,8 +1,10 @@
+import { Injectable } from '@nestjs/common';
 import { PrismaConfig } from 'src/databaseORM/prisma.config';
 import { TutorialUpdateDTO } from 'src/dtos/Tutorial/Tutorial.update.dto';
 import { TutorialModel } from 'src/models/Tutorial.model';
 import { ITutorialRepository } from './Tutorial.interface.repository';
 
+@Injectable()
 class TutorialRepository implements ITutorialRepository {
   constructor(private prismaConfig: PrismaConfig) {}
 

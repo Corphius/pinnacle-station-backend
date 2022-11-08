@@ -18,6 +18,7 @@ class ActivityModel {
 
     if (!id) {
       this.id = uuid();
+      this.created_at = new Date();
     }
   }
 }

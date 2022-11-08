@@ -20,6 +20,7 @@ class TutorialModel {
 
     if (!id) {
       this.id = uuid();
+      this.created_at = new Date();
     }
   }
 }
