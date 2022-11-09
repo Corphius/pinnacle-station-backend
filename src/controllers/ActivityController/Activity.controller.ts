@@ -10,10 +10,9 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ActivityService } from 'src/services/Activity.service';
-import {
-  ActivityREQUESTCreate,
-  ActivityREQUESTUpdate,
-} from './Activity.request';
+import { ActivityREQUESTCreate } from './request/Activity.create.request';
+import { ActivityREQUESTUpdate } from './request/Activity.update.request';
+import { ActivityREQUESTlistWithFilters } from './request/Activity.listwithfilters.request';
 
 @ApiTags('Activity')
 @Controller('/activity')
@@ -35,7 +34,9 @@ class ActivityController {
   }
 
   @Get('/')
-  async getAllRegistersWithFilters(@Body() body: ActivityREQUESTCreate) {
+  async getAllRegistersWithFilters(
+    @Body() body: ActivityREQUESTlistWithFilters,
+  ) {
     return await this.activityService.getAllRegistersWithFilters(body);
   }
 

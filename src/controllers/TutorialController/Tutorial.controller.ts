@@ -10,10 +10,9 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { TutorialService } from 'src/services/Tutorial.service';
-import {
-  TutorialREQUESTCreate,
-  TutorialREQUESTUpdate,
-} from './Tutorial.request';
+import { TutorialREQUESTCreate } from './request/Tutorial.create.request';
+import { TutorialREQUESTlistWithFilters } from './request/Tutorial.listwithfilters.request';
+import { TutorialREQUESTUpdate } from './request/Tutorial.update.request';
 
 @ApiTags('Tutorial')
 @Controller('/tutorial')
@@ -35,7 +34,9 @@ class TutorialController {
   }
 
   @Get('/')
-  async getAllRegistersWithFilters(@Body() body: TutorialREQUESTCreate) {
+  async getAllRegistersWithFilters(
+    @Body() body: TutorialREQUESTlistWithFilters,
+  ) {
     return await this.tutorialService.getAllRegistersWithFilters(body);
   }
 
