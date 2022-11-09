@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
+import { IsNumber, IsString, IsUUID } from 'class-validator';
 
 class TutorialREQUESTlistWithFilters {
   @ApiProperty({

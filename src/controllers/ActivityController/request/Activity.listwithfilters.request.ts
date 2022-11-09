@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsString, IsUUID } from 'class-validator';
 
 class ActivityREQUESTlistWithFilters {
   @ApiProperty({
