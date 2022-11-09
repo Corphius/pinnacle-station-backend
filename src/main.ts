@@ -9,7 +9,9 @@ async function bootstrap() {
     .setTitle('Pinnacle Example')
     .setDescription('version initial of doc')
     .setVersion('1.0')
-    .addTag('pinnacles')
+    .addTag('Squad')
+    .addTag('Tutorial')
+    .addTag('Activity')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

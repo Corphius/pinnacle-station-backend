@@ -8,12 +8,14 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { ActivityService } from 'src/services/Activity.service';
 import {
   ActivityREQUESTCreate,
   ActivityREQUESTUpdate,
 } from './Activity.request';
 
+@ApiTags('Activity')
 @Controller('/activity')
 class ActivityController {
   constructor(private activityService: ActivityService) {}
