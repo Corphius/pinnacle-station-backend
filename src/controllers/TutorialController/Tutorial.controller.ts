@@ -8,12 +8,14 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { TutorialService } from 'src/services/Tutorial.service';
 import {
   TutorialREQUESTCreate,
   TutorialREQUESTUpdate,
 } from './Tutorial.request';
 
+@ApiTags('Tutorial')
 @Controller('/tutorial')
 class TutorialController {
   constructor(private tutorialService: TutorialService) {}

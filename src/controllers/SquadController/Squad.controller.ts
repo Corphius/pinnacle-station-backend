@@ -8,9 +8,11 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { SquadService } from 'src/services/Squad.service';
 import { SquadREQUESTCreate, SquadREQUESTUpdate } from './Squad.request';
 
+@ApiTags('Squad')
 @Controller('/squad')
 class SquadController {
   constructor(private squadService: SquadService) {}
