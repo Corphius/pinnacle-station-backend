@@ -5,13 +5,12 @@ class ActivityModel {
   tutorial_id?: string;
   description: string;
   title: string;
-  options: string[];
-  answer: string;
   image_title: string;
   image_url: string;
   badge: string;
   created_at: Date;
   updated_at?: Date;
+  progress: number;
 
   constructor(props: Omit<ActivityModel, 'id' | 'created_at'>, id?: string) {
     Object.assign(this, props);

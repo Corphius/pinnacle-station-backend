@@ -19,14 +19,6 @@ class ActivitiesUpdateDTO {
 
   @IsNotEmpty()
   @IsString()
-  options: string[];
-
-  @IsNotEmpty()
-  @IsString()
-  answer: string;
-
-  @IsNotEmpty()
-  @IsString()
   image_title: string;
 
   @IsNotEmpty()

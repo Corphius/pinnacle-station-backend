@@ -66,6 +66,8 @@ class ActivityREQUESTCreate {
   @IsNotEmpty()
   @IsString()
   badge: string;
+
+  progress: number;
 }
 class ActivityREQUESTUpdate {
   @ApiProperty({

@@ -13,30 +13,30 @@ datasource db {
 model Squad {
   id              String    @id @default(uuid())
   name            String    @unique
-  product_manager String
-  tech_manager    String
-  initial_time    DateTime?
-  description     String
+  product_manager String    @db.VarChar(255)
+  tech_manager    String    @db.VarChar(255)
+  initial_time    DateTime? @db.Timestamp
+  description     String    @db.VarChar(255)
   members         String[]
-  created_at      DateTime?
-  updated_at      DateTime?
+  created_at      DateTime? @db.Timestamp
+  updated_at      DateTime? @db.Timestamp
 
   tutorial Tutorial[]
 }
 
 model Tutorial {
   id            String    @id @default(uuid())
-  title         String
-  urlVideo      String
-  progress      Int
-  titleVideo    String
-  description   String
-  image_url     String
-  outside_url   String
-  image_title   String
-  created_at    DateTime?
-  tutorial_type Int
-  updated_at    DateTime?
+  title         String    @db.VarChar(255)
+  urlVideo      String    @db.VarChar(255)
+  progress      Int       @db.Integer()
+  titleVideo    String    @db.VarChar(255)
+  description   String    @db.VarChar(255)
+  image_url     String    @db.VarChar(255)
+  outside_url   String    @db.VarChar(255)
+  image_title   String    @db.VarChar(255)
+  created_at    DateTime? @db.Timestamp
+  tutorial_type Int       @db.Integer()
+  updated_at    DateTime? @db.Timestamp
 
   Squad    Squad?  @relation(fields: [squad_id], references: [id])
   squad_id String?
@@ -46,16 +46,30 @@ model Tutorial {
 
 model Activity {
   id          String    @id @default(uuid())
-  description String
-  title       String
-  options     String[]
-  answer      String
-  image_title String
-  image_url   String
-  badge       String
-  created_at  DateTime?
-  updated_at  DateTime?
+  description String    @db.VarChar(255)
+  title       String    @db.VarChar(255)
+  image_title String    @db.VarChar(255)
+  image_url   String    @db.VarChar(255)
+  badge       String    @db.VarChar(255)
+  created_at  DateTime? @db.Timestamp
+  updated_at  DateTime? @db.Timestamp
+  progress    Int       @db.Integer()
 
-  Tutorial    Tutorial? @relation(fields: [tutorial_id], references: [id])
+  Tutorial    Tutorial?  @relation(fields: [tutorial_id], references: [id])
   tutorial_id String?
+  Question    Question[]
+}
+
+model Question {
+  id                String    @id @default(uuid())
+  title             String
+  description       String
+  image_url         String
+  answer_options    String[]
+  created_at        DateTime? @db.Timestamp
+  updated_at        DateTime? @db.Timestamp
+  correct_answer_id Int       @db.Integer()
+
+  Tutorial    Activity? @relation(fields: [activity_id], references: [id])
+  activity_id String?
 }
