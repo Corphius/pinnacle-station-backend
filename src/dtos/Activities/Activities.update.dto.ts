@@ -24,10 +24,6 @@ class ActivitiesUpdateDTO {
   @IsNotEmpty()
   @IsString()
   image_url: string;
-
-  @IsNotEmpty()
-  @IsString()
-  badge: string;
 }
 
 export { ActivitiesUpdateDTO };

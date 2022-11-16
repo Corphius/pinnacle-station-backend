@@ -11,17 +11,16 @@ datasource db {
 }
 
 model Squad {
-  id              String    @id @default(uuid())
-  name            String    @unique
-  product_manager String    @db.VarChar(255)
-  tech_manager    String    @db.VarChar(255)
-  initial_time    DateTime? @db.Timestamp
-  description     String    @db.VarChar(255)
+  id              String     @id @default(uuid())
+  name            String     @unique
+  product_manager String     @db.VarChar(255)
+  tech_manager    String     @db.VarChar(255)
+  initial_time    DateTime?  @db.Timestamp
+  description     String     @db.VarChar(255)
   members         String[]
-  created_at      DateTime? @db.Timestamp
-  updated_at      DateTime? @db.Timestamp
-
-  tutorial Tutorial[]
+  created_at      DateTime?  @db.Timestamp
+  updated_at      DateTime?  @db.Timestamp
+  tutorial        Tutorial[]
 }
 
 model Tutorial {
@@ -37,27 +36,26 @@ model Tutorial {
   created_at    DateTime? @db.Timestamp
   tutorial_type Int       @db.Integer()
   updated_at    DateTime? @db.Timestamp
+  Squad         Squad?    @relation(fields: [squad_id], references: [id])
+  squad_id      String?
 
-  Squad    Squad?  @relation(fields: [squad_id], references: [id])
-  squad_id String?
-
-  activity Activity[]
+  activity      Activity[]
+  BadgeTutorial BadgeOnTutorial[]
 }
 
 model Activity {
-  id          String    @id @default(uuid())
-  description String    @db.VarChar(255)
-  title       String    @db.VarChar(255)
-  image_title String    @db.VarChar(255)
-  image_url   String    @db.VarChar(255)
-  badge       String    @db.VarChar(255)
-  created_at  DateTime? @db.Timestamp
-  updated_at  DateTime? @db.Timestamp
-  progress    Int       @db.Integer()
-
-  Tutorial    Tutorial?  @relation(fields: [tutorial_id], references: [id])
-  tutorial_id String?
-  Question    Question[]
+  id            String            @id @default(uuid())
+  description   String            @db.VarChar(255)
+  title         String            @db.VarChar(255)
+  image_title   String            @db.VarChar(255)
+  image_url     String            @db.VarChar(255)
+  created_at    DateTime?         @db.Timestamp
+  updated_at    DateTime?         @db.Timestamp
+  progress      Int               @db.Integer()
+  Tutorial      Tutorial?         @relation(fields: [tutorial_id], references: [id])
+  tutorial_id   String?
+  Question      Question[]
+  BadgeActivity BadgeOnActivity[]
 }
 
 model Question {
@@ -69,7 +67,39 @@ model Question {
   created_at        DateTime? @db.Timestamp
   updated_at        DateTime? @db.Timestamp
   correct_answer_id Int       @db.Integer()
+  Tutorial          Activity? @relation(fields: [activity_id], references: [id])
+  activity_id       String?
+}
 
-  Tutorial    Activity? @relation(fields: [activity_id], references: [id])
-  activity_id String?
+model Badge {
+  id            String            @id @default(uuid())
+  title         String            @db.VarChar(255)
+  image         String            @db.VarChar(255)
+  available     Boolean
+  created_at    DateTime?         @db.Timestamp
+  updated_at    DateTime?         @db.Timestamp
+  BadgeActivity BadgeOnActivity[]
+  BadgeTutorial BadgeOnTutorial[]
+}
+
+model BadgeOnActivity {
+  badge       Badge     @relation(fields: [badge_id], references: [id])
+  badge_id    String
+  activity    Activity  @relation(fields: [activity_id], references: [id])
+  activity_id String
+  created_at  DateTime? @db.Timestamp
+  updated_at  DateTime? @db.Timestamp
+
+  @@id([badge_id, activity_id])
+}
+
+model BadgeOnTutorial {
+  badge       Badge     @relation(fields: [badge_id], references: [id])
+  badge_id    String
+  tutorial    Tutorial  @relation(fields: [tutorial_id], references: [id])
+  tutorial_id String
+  created_at  DateTime? @db.Timestamp
+  updated_at  DateTime? @db.Timestamp
+
+  @@id([badge_id, tutorial_id])
 }

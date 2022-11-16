@@ -59,14 +59,6 @@ class ActivityREQUESTCreate {
   @IsString()
   image_url: string;
 
-  @ApiProperty({
-    description: 'rota das insignias',
-    example: 'insigniadjqiwrjhniasdajdjaig_2020.jpg',
-  })
-  @IsNotEmpty()
-  @IsString()
-  badge: string;
-
   progress: number;
 }
 class ActivityREQUESTUpdate {
@@ -135,14 +127,6 @@ class ActivityREQUESTUpdate {
   @IsNotEmpty()
   @IsString()
   image_url: string;
-
-  @ApiProperty({
-    description: 'rota das insignias',
-    example: 'insigniadjqiwrjhniasdajdjaig_2020.jpg',
-  })
-  @IsNotEmpty()
-  @IsString()
-  badge: string;
 }
 
 export { ActivityREQUESTCreate, ActivityREQUESTUpdate };

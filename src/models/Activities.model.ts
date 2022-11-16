@@ -7,7 +7,6 @@ class ActivityModel {
   title: string;
   image_title: string;
   image_url: string;
-  badge: string;
   created_at: Date;
   updated_at?: Date;
   progress: number;

@@ -22,10 +22,6 @@ class ActivitiesCreateDTO {
   image_url: string;
 
   @IsNotEmpty()
-  @IsString()
-  badge: string;
-
-  @IsNotEmpty()
   @IsInt()
   progress: number;
 }
