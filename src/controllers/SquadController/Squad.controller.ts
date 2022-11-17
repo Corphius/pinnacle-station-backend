@@ -10,7 +10,9 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { SquadService } from 'src/services/Squad.service';
-import { SquadREQUESTCreate, SquadREQUESTUpdate } from './Squad.request';
+import { SquadREQUESTCreate } from './requests/Squad.create.request';
+import { SquadREQUESTlistWithFilters } from './requests/Squad.listwithfilters.request';
+import { SquadREQUESTUpdate } from './requests/Squad.update.request';
 
 @ApiTags('Squad')
 @Controller('/squad')
@@ -32,7 +34,7 @@ class SquadController {
   }
 
   @Get('/')
-  async getAllRegistersWithFilters(@Body() body: SquadREQUESTCreate) {
+  async getAllRegistersWithFilters(@Body() body: SquadREQUESTlistWithFilters) {
     return await this.squadService.getAllRegistersWithFilters(body);
   }
 
