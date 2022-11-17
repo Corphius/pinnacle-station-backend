@@ -9,6 +9,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { BadgeOnTutorialDTO } from 'src/dtos/BadgeOnTutorial/BadgeOnTutorial.dto';
 import { TutorialService } from 'src/services/Tutorial.service';
 import {
   TutorialREQUESTCreate,
@@ -47,6 +48,12 @@ class TutorialController {
   @Delete(':id')
   async deleteById(@Param('id') id: string) {
     return await this.tutorialService.deleteById(id);
+  }
+
+  @Post('/badge')
+  @HttpCode(201)
+  async createBadge(@Body() body: BadgeOnTutorialDTO) {
+    return await this.tutorialService.badgeForTutorial(body);
   }
 }
 
