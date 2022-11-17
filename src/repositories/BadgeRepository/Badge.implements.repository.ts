@@ -8,13 +8,10 @@ import { IBadgeRepository } from './Badge.interface.repository';
 class BadgeRepository implements IBadgeRepository {
   constructor(private prismaConfig: PrismaConfig) {}
 
-  async create(data: BadgeModel): Promise<BadgeModel> {
+  create(data: BadgeModel): Promise<BadgeModel> {
     return this.prismaConfig.badge.create({ data: data });
   }
-  async updateById(
-    id: string,
-    badgeUpdateDTO: BadgeUpdateDTO,
-  ): Promise<BadgeModel> {
+  updateById(id: string, badgeUpdateDTO: BadgeUpdateDTO): Promise<BadgeModel> {
     return this.prismaConfig.badge.update({
       where: { id: id },
       data: {
@@ -23,13 +20,13 @@ class BadgeRepository implements IBadgeRepository {
       },
     });
   }
-  async getAllRegisters(filters?: object): Promise<BadgeModel[]> {
+  getAllRegisters(filters?: object): Promise<BadgeModel[]> {
     return this.prismaConfig.badge.findMany({ where: filters });
   }
-  async getById(id: string): Promise<BadgeModel> {
+  getById(id: string): Promise<BadgeModel> {
     return this.prismaConfig.badge.findUnique({ where: { id: id } });
   }
-  async deleteById(id: string) {
+  deleteById(id: string) {
     return this.prismaConfig.badge.delete({ where: { id: id } });
   }
 }
