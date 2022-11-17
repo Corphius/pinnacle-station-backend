@@ -9,10 +9,11 @@ async function bootstrap() {
     .setTitle('Pinnacle Example')
     .setDescription('version initial of doc')
     .setVersion('1.0')
+    .addTag('Activity')
+    .addTag('Badge')
+    .addTag('Question')
     .addTag('Squad')
     .addTag('Tutorial')
-    .addTag('Activity')
-    .addTag('Question')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
