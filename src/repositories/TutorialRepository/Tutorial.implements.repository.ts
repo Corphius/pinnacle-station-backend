@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaConfig } from 'src/databaseORM/prisma.config';
+import { BadgeOnTutorialDTO } from 'src/dtos/BadgeOnTutorial/BadgeOnTutorial.dto';
 import { TutorialUpdateDTO } from 'src/dtos/Tutorial/Tutorial.update.dto';
 import { TutorialModel } from 'src/models/Tutorial.model';
 import { ITutorialRepository } from './Tutorial.interface.repository';
@@ -31,6 +32,14 @@ class TutorialRepository implements ITutorialRepository {
   }
   deleteById(id: string) {
     return this.prismaConfig.tutorial.delete({ where: { id: id } });
+  }
+
+  createBadgeForTutorial(
+    data: BadgeOnTutorialDTO,
+  ): Promise<BadgeOnTutorialDTO> {
+    return this.prismaConfig.badgeOnTutorial.create({
+      data: { created_at: new Date(), ...data },
+    });
   }
 }
 

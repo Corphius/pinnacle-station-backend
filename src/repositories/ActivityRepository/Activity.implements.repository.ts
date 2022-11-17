@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaConfig } from 'src/databaseORM/prisma.config';
 import { ActivitiesUpdateDTO } from 'src/dtos/Activities/Activities.update.dto';
+import { BadgeOnActivityDTO } from 'src/dtos/BadgeOnActivity/BadgeOnActivity.dto';
 import { ActivityModel } from 'src/models/Activities.model';
 import { IActivityRepository } from './Activity.interface.repository';
 
@@ -31,6 +32,14 @@ class ActivityRepository implements IActivityRepository {
   }
   deleteById(id: string) {
     return this.prismaConfig.activity.delete({ where: { id: id } });
+  }
+
+  createBadgeForActivity(
+    data: BadgeOnActivityDTO,
+  ): Promise<BadgeOnActivityDTO> {
+    return this.prismaConfig.badgeOnActivity.create({
+      data: { created_at: new Date(), ...data },
+    });
   }
 }
 

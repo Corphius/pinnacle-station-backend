@@ -1,13 +1,13 @@
 import { IsInt, IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
-class ActivitiesCreateDTO {
+class QuestionUpdateDTO {
   @IsNotEmpty()
   @IsUUID()
-  tutorial_id: string;
+  id: string;
 
   @IsNotEmpty()
-  @IsString()
-  description: string;
+  @IsUUID()
+  activity_id: string;
 
   @IsNotEmpty()
   @IsString()
@@ -15,15 +15,19 @@ class ActivitiesCreateDTO {
 
   @IsNotEmpty()
   @IsString()
-  image_title: string;
+  description: string;
 
   @IsNotEmpty()
   @IsString()
   image_url: string;
 
   @IsNotEmpty()
+  @IsString()
+  answer_options: string[];
+
+  @IsNotEmpty()
   @IsInt()
-  progress: number;
+  correct_answer_id: number;
 }
 
-export { ActivitiesCreateDTO };
+export { QuestionUpdateDTO };
