@@ -19,23 +19,11 @@ class ActivitiesUpdateDTO {
 
   @IsNotEmpty()
   @IsString()
-  options: string[];
-
-  @IsNotEmpty()
-  @IsString()
-  answer: string;
-
-  @IsNotEmpty()
-  @IsString()
   image_title: string;
 
   @IsNotEmpty()
   @IsString()
   image_url: string;
-
-  @IsNotEmpty()
-  @IsString()
-  badge: string;
 }
 
 export { ActivitiesUpdateDTO };

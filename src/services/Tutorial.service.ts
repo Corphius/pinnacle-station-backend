@@ -1,8 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { BadgeOnTutorialDTO } from 'src/dtos/BadgeOnTutorial/BadgeOnTutorial.dto';
 import { TutorialCreateDTO } from 'src/dtos/Tutorial/Tutorial.create.dto';
 import { TutorialUpdateDTO } from 'src/dtos/Tutorial/Tutorial.update.dto';
 import { GenericException } from 'src/exceptions/Generic.exception';
 import { ServiceException } from 'src/exceptions/Service.exception';
+import { IBadgeRepository } from 'src/repositories/BadgeRepository/Badge.interface.repository';
 import { ITutorialRepository } from 'src/repositories/TutorialRepository/Tutorial.interface.repository';
 import { IserviceCRUD } from './serviceContract/service.crud.interface';
 import { createTutorialDTOforModel } from './servicesMappers/Tutorial.mapper';
@@ -14,6 +16,8 @@ class TutorialService implements IserviceCRUD {
   constructor(
     @Inject('ITutorialRepository')
     private tutorialRepository: ITutorialRepository,
+    @Inject('IBadgeRepository')
+    private badgeRepository: IBadgeRepository,
   ) {}
 
   async create(tutorialCreateDTO: TutorialCreateDTO) {
@@ -71,6 +75,28 @@ class TutorialService implements IserviceCRUD {
       } else {
         return await this.tutorialRepository.deleteById(id);
       }
+    } catch (error) {
+      console.log(error);
+      if (error instanceof GenericException) throw error;
+      throw new ServiceException(this.SERVICE_NAME);
+    }
+  }
+
+  async badgeForTutorial(data: BadgeOnTutorialDTO) {
+    try {
+      const tutorial = await this.tutorialRepository.getById(data.tutorial_id);
+
+      if (!tutorial) {
+        throw new Error('tutorial does not found!');
+      }
+
+      const badge = await this.badgeRepository.getById(data.badge_id);
+
+      if (!badge) {
+        throw new Error('badge does not found!');
+      }
+
+      return await this.tutorialRepository.createBadgeForTutorial(data);
     } catch (error) {
       console.log(error);
       if (error instanceof GenericException) throw error;

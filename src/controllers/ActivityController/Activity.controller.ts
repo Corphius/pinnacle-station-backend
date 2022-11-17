@@ -9,6 +9,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { BadgeOnActivityDTO } from 'src/dtos/BadgeOnActivity/BadgeOnActivity.dto';
 import { ActivityService } from 'src/services/Activity.service';
 import { ActivityREQUESTCreate } from './request/Activity.create.request';
 import { ActivityREQUESTUpdate } from './request/Activity.update.request';
@@ -48,6 +49,12 @@ class ActivityController {
   @Delete(':id')
   async deleteById(@Param('id') id: string) {
     return await this.activityService.deleteById(id);
+  }
+
+  @Post('/badge')
+  @HttpCode(201)
+  async createBadge(@Body() body: BadgeOnActivityDTO) {
+    return await this.activityService.badgeForTheActivity(body);
   }
 }
 

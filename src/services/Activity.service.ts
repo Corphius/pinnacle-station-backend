@@ -1,9 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ActivitiesCreateDTO } from 'src/dtos/Activities/Activities.create.dto';
 import { ActivitiesUpdateDTO } from 'src/dtos/Activities/Activities.update.dto';
+import { BadgeOnActivityDTO } from 'src/dtos/BadgeOnActivity/BadgeOnActivity.dto';
 import { GenericException } from 'src/exceptions/Generic.exception';
 import { ServiceException } from 'src/exceptions/Service.exception';
 import { IActivityRepository } from 'src/repositories/ActivityRepository/Activity.interface.repository';
+import { IBadgeRepository } from 'src/repositories/BadgeRepository/Badge.interface.repository';
 import { IserviceCRUD } from './serviceContract/service.crud.interface';
 import { createActivityDTOforModel } from './servicesMappers/Activity.mapper';
 
@@ -14,6 +16,8 @@ class ActivityService implements IserviceCRUD {
   constructor(
     @Inject('IActivityRepository')
     private activityRepository: IActivityRepository,
+    @Inject('IBadgeRepository')
+    private badgeRepository: IBadgeRepository,
   ) {}
 
   async create(activityCreateDTO: ActivitiesCreateDTO) {
@@ -51,12 +55,12 @@ class ActivityService implements IserviceCRUD {
   }
   async getById(id: string) {
     try {
-      const tutorial = await this.activityRepository.getById(id);
+      const activity = await this.activityRepository.getById(id);
 
-      if (!tutorial) {
+      if (!activity) {
         throw new Error('not found!');
       }
-      return tutorial;
+      return activity;
     } catch (error) {
       console.log(error);
       if (error instanceof GenericException) throw error;
@@ -65,12 +69,34 @@ class ActivityService implements IserviceCRUD {
   }
   async deleteById(id: string) {
     try {
-      const tutorial = await this.getById(id);
-      if (!tutorial) {
+      const activity = await this.getById(id);
+      if (!activity) {
         throw new Error('not found!');
       } else {
         return await this.activityRepository.deleteById(id);
       }
+    } catch (error) {
+      console.log(error);
+      if (error instanceof GenericException) throw error;
+      throw new ServiceException(this.SERVICE_NAME);
+    }
+  }
+
+  async badgeForTheActivity(data: BadgeOnActivityDTO) {
+    try {
+      const activity = await this.activityRepository.getById(data.activity_id);
+
+      if (!activity) {
+        throw new Error('activity does not found!');
+      }
+
+      const badge = await this.badgeRepository.getById(data.badge_id);
+
+      if (!badge) {
+        throw new Error('badge does not found!');
+      }
+
+      return await this.activityRepository.createBadgeForActivity(data);
     } catch (error) {
       console.log(error);
       if (error instanceof GenericException) throw error;
