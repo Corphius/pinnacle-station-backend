@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ActivityModule } from './modules/Activity.module';
+import { AuthModule } from './modules/Auth.module';
 import { BadgeModule } from './modules/Badge.module';
 import { PrismaModule } from './modules/Prisma.module';
 import { QuestionModule } from './modules/Question.module';
@@ -15,6 +16,7 @@ import { TutorialModule } from './modules/Tutorial.module';
     TutorialModule,
     QuestionModule,
     BadgeModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
