@@ -5,8 +5,8 @@ class UserModel {
   name: string;
   email: string;
   password: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
 
   constructor(props: Omit<UserModel, 'id' | 'created_at'>, id?: string) {
     Object.assign(this, props);

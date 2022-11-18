@@ -1,8 +1,8 @@
 import { PrismaConfig } from 'src/databaseORM/prisma.config';
 import { UserModel } from 'src/models/User.model';
-import { IUSerRepository } from './User.interface.repository';
+import { IUserRepository } from './User.interface.repository';
 
-class UserRepository implements IUSerRepository {
+class UserRepository implements IUserRepository {
   constructor(private prismaConfig: PrismaConfig) {}
 
   create(data: UserModel): Promise<UserModel> {
