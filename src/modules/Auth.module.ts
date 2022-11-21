@@ -4,7 +4,7 @@ import { GoogleStrategy } from 'src/strategies/google/GoogleStrategy';
 import { AuthService } from 'src/services/Auth.service';
 import { UserModule } from './User.module';
 import { PassportModule } from '@nestjs/passport';
-import { LocalStrategy } from 'src/strategies/local/Local.strategy';
+import { LocalStrategy } from 'src/strategies/local/local.strategy';
 import { GoogleController } from 'src/controllers/AuthController/Google.controller';
 
 @Module({

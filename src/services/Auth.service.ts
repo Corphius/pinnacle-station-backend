@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { compare } from 'bcrypt';
-import { userEmailDTO } from 'src/dtos/User/User.email.dto';
 import { ServiceException } from 'src/exceptions/Service.exception';
 import { UserService } from './User.service';
 
@@ -8,15 +7,15 @@ import { UserService } from './User.service';
 class AuthService {
   constructor(private usersService: UserService) {}
 
-  async validateUser(email: userEmailDTO, password: string): Promise<any> {
-    const user = await this.usersService.findUserByEmail(email);
-    const passwordMatch = await compare(password, user.password);
+  async validateUser(email: string, pass: string): Promise<any> {
+    const user = await this.usersService.findUserByEmail({ email });
+    // const passwordMatch = await compare(pass, user.password);
 
-    if (!passwordMatch) {
-      throw new ServiceException('Email or password incorrect!');
-    }
+    // if (!passwordMatch) {
+    //   throw new ServiceException('Email or password incorrect!');
+    // }
 
-    if (user && user.password === password) {
+    if (user && user.password === pass) {
       const { password, ...result } = user;
       return result;
     }

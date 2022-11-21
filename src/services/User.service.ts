@@ -18,9 +18,9 @@ class UserService {
 
   async create(userCreateDTO: UserCreateDTO) {
     try {
-      const hashpassword = await hash(userCreateDTO.password, 8);
+      // const hashpassword = await hash(userCreateDTO.password, 8);
 
-      userCreateDTO.password = hashpassword;
+      // userCreateDTO.password = hashpassword;
 
       return await this.userRepository.create(
         await createUserDTOforModel(userCreateDTO),
