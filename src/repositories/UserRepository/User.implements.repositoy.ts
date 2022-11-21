@@ -11,7 +11,9 @@ class UserRepository implements IUserRepository {
     return this.prismaConfig.user.create({ data: data });
   }
   findByEmail(email: string): Promise<UserModel> {
-    return this.prismaConfig.user.findUnique({ where: { email: email } });
+    return this.prismaConfig.user.findUnique({
+      where: { email: email },
+    });
   }
   findById(id: string): Promise<UserModel> {
     return this.prismaConfig.user.findUnique({ where: { id: id } });

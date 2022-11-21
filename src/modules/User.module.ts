@@ -11,5 +11,6 @@ import { UserService } from 'src/services/User.service';
     UserService,
     { provide: 'IUserRepository', useClass: UserRepository },
   ],
+  exports: [UserService],
 })
 export class UserModule {}
