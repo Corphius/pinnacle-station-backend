@@ -7,6 +7,7 @@ import { QuestionModule } from './modules/Question.module';
 
 import { SquadModule } from './modules/Squad.module';
 import { TutorialModule } from './modules/Tutorial.module';
+import { UserModule } from './modules/User.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { TutorialModule } from './modules/Tutorial.module';
     QuestionModule,
     BadgeModule,
     AuthModule,
+    UserModule,
   ],
 })
 export class AppModule {}

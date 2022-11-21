@@ -1,7 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import { PrismaConfig } from 'src/databaseORM/prisma.config';
 import { UserModel } from 'src/models/User.model';
 import { IUserRepository } from './User.interface.repository';
 
+@Injectable()
 class UserRepository implements IUserRepository {
   constructor(private prismaConfig: PrismaConfig) {}
 
