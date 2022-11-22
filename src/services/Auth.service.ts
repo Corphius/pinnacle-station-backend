@@ -13,18 +13,14 @@ class AuthService {
 
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.usersService.findUserByEmail({ email });
-    // const passwordMatch = await compare(pass, user.password);
+    if (user) {
+      const isPasswordValid = await compare(pass, user.password);
 
-    // if (!passwordMatch) {
-    //   throw new ServiceException('Email or password incorrect!');
-    // }
-
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
+      if (isPasswordValid) {
+        return { ...user, pass: undefined };
+      }
     }
-
-    return null;
+    throw new Error('email or pass dont match');
   }
 
   async login(user: any) {
