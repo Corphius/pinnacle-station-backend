@@ -22,8 +22,6 @@ class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     refreshToken: string,
     profile: any,
   ): Promise<any> {
-    // console.log(accessToken);
-    // console.log(profile);
     const { name, emails, photos } = profile;
     const user = {
       email: emails[0].value,

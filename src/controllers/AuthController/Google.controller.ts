@@ -8,14 +8,11 @@ class GoogleController {
   @Get()
   @UseGuards(GoogleOAuthGuard)
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  async googleAuth(@Request() req) {
-    console.log(' -> googleAuth', req);
-  }
+  async googleAuth(@Request() req) {}
 
   @Get('redirect')
   //@UseGuards(GoogleOAuthGuard)
   googleAuthRedirect(@Request() req) {
-    console.log('req -> controller ', req);
     return this.authService.googleLogin(req);
   }
 }

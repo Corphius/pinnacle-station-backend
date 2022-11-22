@@ -31,7 +31,6 @@ class AuthService {
   }
 
   googleLogin(req) {
-    console.log('->req ', req);
     if (!req.user) {
       return 'no user from google';
     }
