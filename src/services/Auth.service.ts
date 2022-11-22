@@ -3,6 +3,7 @@ import { compare } from 'bcrypt';
 import { ServiceException } from 'src/exceptions/Service.exception';
 import { UserService } from './User.service';
 import { JwtService } from '@nestjs/jwt';
+import { UserCreateDTO } from 'src/dtos/User/User.create.dto';
 
 @Injectable()
 class AuthService {
@@ -23,21 +24,31 @@ class AuthService {
     throw new Error('email or pass dont match');
   }
 
-  async login(user: any) {
-    const payload = { email: user.email, sub: user.userId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
-  }
-
-  googleLogin(req) {
+  async googleLogin(req) {
     if (!req.user) {
       return 'no user from google';
     }
+    const objectUser: UserCreateDTO = {
+      email: req.user.email,
+      name: req.user.name,
+      password: req.user.password,
+    };
+
+    const userFromGoogle = await this.usersService.create(objectUser);
 
     return {
       message: 'user information from google DESCOM',
       user: req.user,
+      access_token: this.jwtService.sign({
+        email: userFromGoogle.email,
+      }),
+    };
+  }
+
+  async login(user: any) {
+    const payload = { email: user.email, sub: user.userId };
+    return {
+      access_token: this.jwtService.sign(payload),
     };
   }
 }
