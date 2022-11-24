@@ -10,6 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id         String    @id @default(uuid())
+  name       String    @db.VarChar(255)
+  email      String    @unique @db.VarChar(255)
+  password   String
+  created_at DateTime? @db.Timestamp
+  updated_at DateTime? @db.Timestamp
+}
+
 model Squad {
   id              String     @id @default(uuid())
   name            String     @unique
