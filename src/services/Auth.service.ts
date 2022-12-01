@@ -4,6 +4,9 @@ import { ServiceException } from 'src/exceptions/Service.exception';
 import { UserService } from './User.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserCreateDTO } from 'src/dtos/User/User.create.dto';
+import { GenericException } from 'src/exceptions/Generic.exception';
+import { ErrorCodes } from 'src/exceptions/contracts/ErrorCode.interface';
+import { LoginException } from 'src/exceptions/Login.execption';
 
 @Injectable()
 class AuthService {
@@ -21,7 +24,7 @@ class AuthService {
         return { ...user, pass: undefined };
       }
     }
-    throw new Error('email or pass dont match');
+    throw new LoginException('test');
   }
 
   async googleLogin(req) {
