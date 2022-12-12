@@ -1,4 +1,4 @@
-import { ErrorCode } from './contracts/ErrorCode.interface';
+import { ErrorCode } from '../contracts/ErrorCode.interface';
 
 class GenericException extends Error {
   constructor(

@@ -1,9 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { ExceptionHandler } from './exceptions/exceptionHandler';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.useGlobalFilters(new ExceptionHandler());
 
   const config = new DocumentBuilder()
     .setTitle('Pinnacle Example')

@@ -12,36 +12,36 @@ export const ErrorCodes = {
   SERVICE_ERROR: {
     code: 'SERVICE_ERROR',
     message: 'Some Error ocurred on the service please check in',
-    status: 500,
+    statusCode: 500,
   },
-  ALREADY_EXISTS: {
+  ALREADY_EXISTS_ERROR: {
     code: 'SERVICE_ERROR',
     message: 'Already exists an entity with this param',
     statusCode: 422,
   },
-  NOT_FOUND: {
+  NOT_FOUND_ERROR: {
     code: 'SERVICE_NOT_FOUND_ERROR',
     message: 'This page does not exists',
-    status: 404,
+    statusCode: 404,
   },
   BAD_REQUEST_ERROR: {
     code: 'BAD_REQUEST_ERROR',
     message: 'this request cannot be process',
-    status: 400,
+    statusCode: 400,
   },
   FORBIDDEN_ERROR: {
     code: 'FORBIDDEN_ERROR',
     message: 'this request has be forbidden',
-    status: 403,
+    statusCode: 403,
   },
   UNAUTHORIZED_ERROR: {
     code: 'UNAUTHORIZED_ERROR',
     message: 'you dont have the privileges for this',
-    status: 401,
+    statusCode: 401,
   },
   LOGIN_ERROR: {
     code: 'LOGIN_ERROR',
     message: 'email or pass dont match',
-    status: 406,
+    statusCode: 406,
   },
 };

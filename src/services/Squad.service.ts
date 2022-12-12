@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { SquadCreateDTO } from 'src/dtos/Squad/Squad.create.dto';
 import { SquadUpdateDTO } from 'src/dtos/Squad/Squad.update.dto';
-import { GenericException } from 'src/exceptions/Generic.exception';
-import { ServiceException } from 'src/exceptions/Service.exception';
+import { GenericException } from 'src/exceptions/Error/Generic.exception';
+import { ServiceException } from 'src/exceptions/Error/Service.exception';
+
 import { ISquadRepository } from 'src/repositories/SquadRepository/Squad.interface.repository';
 import { IserviceCRUD } from './serviceContract/service.crud.interface';
 import { createSquadDTOforModel } from './servicesMappers/Squad.mapper';

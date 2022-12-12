@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { QuestionCreateDTO } from 'src/dtos/Question/Question.create.dto';
 import { QuestionUpdateDTO } from 'src/dtos/Question/Question.update.dto';
-import { GenericException } from 'src/exceptions/Generic.exception';
-import { ServiceException } from 'src/exceptions/Service.exception';
+import { GenericException } from 'src/exceptions/Error/Generic.exception';
+import { ServiceException } from 'src/exceptions/Error/Service.exception';
+
 import { IQuestionRepository } from 'src/repositories/QuestionRepository/Question.interface.repository';
 import { IserviceCRUD } from './serviceContract/service.crud.interface';
 import { createQuestionDTOforModel } from './servicesMappers/Question.mapper';

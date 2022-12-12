@@ -1,8 +1,9 @@
 import { Inject } from '@nestjs/common';
 import { BadgeCreateDTO } from 'src/dtos/Badge/Badge.create.dto';
 import { BadgeUpdateDTO } from 'src/dtos/Badge/Badge.update.dto';
-import { GenericException } from 'src/exceptions/Generic.exception';
-import { ServiceException } from 'src/exceptions/Service.exception';
+import { GenericException } from 'src/exceptions/Error/Generic.exception';
+import { ServiceException } from 'src/exceptions/Error/Service.exception';
+
 import { IBadgeRepository } from 'src/repositories/BadgeRepository/Badge.interface.repository';
 import { IserviceCRUD } from './serviceContract/service.crud.interface';
 import { createBadgeDTOforModel } from './servicesMappers/Badge.mapper';

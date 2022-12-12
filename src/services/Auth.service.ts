@@ -1,12 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { compare } from 'bcrypt';
-import { ServiceException } from 'src/exceptions/Service.exception';
 import { UserService } from './User.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserCreateDTO } from 'src/dtos/User/User.create.dto';
-import { GenericException } from 'src/exceptions/Generic.exception';
-import { ErrorCodes } from 'src/exceptions/contracts/ErrorCode.interface';
-import { LoginException } from 'src/exceptions/Login.execption';
+import { LoginException } from 'src/exceptions/Error/Login.execption';
 
 @Injectable()
 class AuthService {
@@ -24,7 +21,7 @@ class AuthService {
         return { ...user, pass: undefined };
       }
     }
-    throw new LoginException('test');
+    throw new LoginException();
   }
 
   async googleLogin(req) {

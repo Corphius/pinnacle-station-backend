@@ -1,4 +1,4 @@
-import { ErrorCodes } from './contracts/ErrorCode.interface';
+import { ErrorCodes } from '../contracts/ErrorCode.interface';
 import { GenericException } from './Generic.exception';
 
 class ServiceException extends GenericException {

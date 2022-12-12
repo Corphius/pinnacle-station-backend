@@ -2,8 +2,9 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ActivitiesCreateDTO } from 'src/dtos/Activities/Activities.create.dto';
 import { ActivitiesUpdateDTO } from 'src/dtos/Activities/Activities.update.dto';
 import { BadgeOnActivityDTO } from 'src/dtos/BadgeOnActivity/BadgeOnActivity.dto';
-import { GenericException } from 'src/exceptions/Generic.exception';
-import { ServiceException } from 'src/exceptions/Service.exception';
+import { GenericException } from 'src/exceptions/Error/Generic.exception';
+import { ServiceException } from 'src/exceptions/Error/Service.exception';
+
 import { IActivityRepository } from 'src/repositories/ActivityRepository/Activity.interface.repository';
 import { IBadgeRepository } from 'src/repositories/BadgeRepository/Badge.interface.repository';
 import { IserviceCRUD } from './serviceContract/service.crud.interface';
