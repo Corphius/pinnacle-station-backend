@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e 
 
-npm run migration:deploy
+yarn migrate:deploy
 
 node dist/server.js
 
