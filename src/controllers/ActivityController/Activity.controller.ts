@@ -8,15 +8,17 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { BadgeOnActivityDTO } from 'src/dtos/BadgeOnActivity/BadgeOnActivity.dto';
 import { ActivityService } from 'src/services/Activity.service';
 import { ActivityREQUESTCreate } from './request/Activity.create.request';
 import { ActivityREQUESTUpdate } from './request/Activity.update.request';
 import { ActivityREQUESTlistWithFilters } from './request/Activity.listwithfilters.request';
+import { ActivityREQUESTbadge } from './request/Activity.badge.request';
 
 @ApiTags('Activity')
 @Controller('/activity')
+@ApiBearerAuth()
 class ActivityController {
   constructor(private activityService: ActivityService) {}
 
@@ -53,7 +55,7 @@ class ActivityController {
 
   @Post('/badge')
   @HttpCode(201)
-  async createBadge(@Body() body: BadgeOnActivityDTO) {
+  async createBadge(@Body() body: ActivityREQUESTbadge) {
     return await this.activityService.badgeForTheActivity(body);
   }
 }

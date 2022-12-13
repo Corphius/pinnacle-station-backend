@@ -1,9 +1,11 @@
 import { Controller, Get, Req, Request, UseGuards } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { IsPublic } from 'src/decorators/is-public.decorator';
 import { GoogleOAuthGuard } from 'src/guards/google-auth.guard';
 import { AuthService } from 'src/services/Auth.service';
 
 @Controller('google')
+@ApiTags('AUTH')
 class GoogleController {
   constructor(private readonly authService: AuthService) {}
   @IsPublic()

@@ -1,9 +1,12 @@
 import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserService } from 'src/services/User.service';
 import { UserREQUESTcreate } from './requests/User.create.request';
 import { UserREQUESTemail } from './requests/User.email.request';
 
+@ApiTags('User')
 @Controller('user')
+@ApiBearerAuth()
 class UserController {
   constructor(private readonly userService: UserService) {}
 

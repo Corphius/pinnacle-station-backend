@@ -8,7 +8,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { BadgeService } from 'src/services/Badge.service';
 import { BadgeREQUESTcreate } from './requests/Badge.create.request';
 import { BadgeREQUESTlistWithFilters } from './requests/Badge.listwithfilters.request';
@@ -16,6 +16,7 @@ import { BadgeREQUESTupdate } from './requests/Badge.update.request';
 
 @ApiTags('Badge')
 @Controller('/badge')
+@ApiBearerAuth()
 class BadgeController {
   constructor(private badgeService: BadgeService) {}
 

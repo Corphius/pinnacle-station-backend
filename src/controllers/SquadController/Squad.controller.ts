@@ -8,7 +8,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { SquadService } from 'src/services/Squad.service';
 import { SquadREQUESTCreate } from './requests/Squad.create.request';
 import { SquadREQUESTlistWithFilters } from './requests/Squad.listwithfilters.request';
@@ -16,6 +16,7 @@ import { SquadREQUESTUpdate } from './requests/Squad.update.request';
 
 @ApiTags('Squad')
 @Controller('/squad')
+@ApiBearerAuth()
 class SquadController {
   constructor(private squadService: SquadService) {}
 

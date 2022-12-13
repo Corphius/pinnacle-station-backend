@@ -8,7 +8,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { QuestionService } from 'src/services/Question.service';
 import { QuestionREQUESTCreate } from './requests/Question.create.request';
 import { QuestionREQUESTlistWithFilters } from './requests/Question.liswithfilters.request';
@@ -16,6 +16,7 @@ import { QuestionREQUESTupdate } from './requests/Question.update.request';
 
 @ApiTags('Question')
 @Controller('/question')
+@ApiBearerAuth()
 class QuestionController {
   constructor(private questionService: QuestionService) {}
 
