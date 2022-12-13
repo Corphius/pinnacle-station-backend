@@ -7,6 +7,7 @@ import { AlreadyExistsException } from './Error/AlreadyExists.execption';
 import { GenericException } from './Error/Generic.exception';
 import { LoginException } from './Error/Login.execption';
 import { NotFoundException } from './Error/NotFound.execption';
+import { NotFoundEMailException } from './Error/NotFoundEmail.exception';
 import { ServiceException } from './Error/Service.exception';
 
 const buildMessage = (errorCode, params?) => {
@@ -55,6 +56,14 @@ export class ExceptionHandler extends BaseExceptionFilter {
       case LoginException: {
         response.status(ErrorCodes.LOGIN_ERROR.statusCode).json(
           buildMessage(ErrorCodes.LOGIN_ERROR, {
+            param: exception.param,
+          }),
+        );
+        return;
+      }
+      case NotFoundEMailException: {
+        response.status(ErrorCodes.NOT_FOUND_EMAIL_ERROR.statusCode).json(
+          buildMessage(ErrorCodes.NOT_FOUND_EMAIL_ERROR, {
             param: exception.param,
           }),
         );

@@ -24,6 +24,11 @@ export const ErrorCodes = {
     message: 'This page does not exists',
     statusCode: 404,
   },
+  NOT_FOUND_EMAIL_ERROR: {
+    code: 'SERVICE_NOT_FOUND_ERROR',
+    message: 'This email does not exists',
+    statusCode: 404,
+  },
   BAD_REQUEST_ERROR: {
     code: 'BAD_REQUEST_ERROR',
     message: 'this request cannot be process',

@@ -3,6 +3,8 @@ import { hash } from 'bcrypt';
 import { UserCreateDTO } from 'src/dtos/User/User.create.dto';
 import { userEmailDTO } from 'src/dtos/User/User.email.dto';
 import { GenericException } from 'src/exceptions/Error/Generic.exception';
+import { NotFoundException } from 'src/exceptions/Error/NotFound.execption';
+import { NotFoundEMailException } from 'src/exceptions/Error/NotFoundEmail.exception';
 import { ServiceException } from 'src/exceptions/Error/Service.exception';
 
 import { IUserRepository } from 'src/repositories/UserRepository/User.interface.repository';
@@ -36,7 +38,7 @@ class UserService {
       const user = await this.userRepository.findByEmail(email.email);
 
       if (!user) {
-        throw new Error('not found!');
+        throw new NotFoundEMailException(email.email);
       }
       return user;
     } catch (error) {
@@ -51,7 +53,7 @@ class UserService {
       const user = await this.userRepository.findById(id);
 
       if (!user) {
-        throw new Error('not found!');
+        throw new NotFoundException(id);
       }
       return user;
     } catch (error) {
