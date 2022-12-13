@@ -5,7 +5,7 @@ import { GoogleOAuthGuard } from 'src/guards/google-auth.guard';
 import { AuthService } from 'src/services/Auth.service';
 
 @Controller('google')
-@ApiTags('AUTH')
+@ApiTags('Google')
 class GoogleController {
   constructor(private readonly authService: AuthService) {}
   @IsPublic()

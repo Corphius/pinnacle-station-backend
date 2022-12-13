@@ -12,17 +12,15 @@ async function bootstrap() {
     .setTitle('Descomplication')
     .setDescription(description)
     .setVersion(version)
-    .addBearerAuth(
-      { type: 'http', scheme: 'bearer', bearerFormat: 'Token' },
-      'access-token',
-    )
-    .addTag('AUTH')
+    .addBearerAuth()
+    .addTag('AUTHENTICATE')
     .addTag('Activity')
     .addTag('Badge')
     .addTag('Question')
     .addTag('Squad')
     .addTag('Tutorial')
     .addTag('User')
+    .addTag('Google')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/', app, document);

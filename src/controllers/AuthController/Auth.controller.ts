@@ -14,7 +14,7 @@ import { AuthService } from 'src/services/Auth.service';
 import { UserREQUESTAuth } from './requests/User.auth.dto';
 
 @Controller()
-@ApiTags('AUTH')
+@ApiTags('AUTHENTICATE')
 class AuthController {
   constructor(private authService: AuthService) {}
   @IsPublic()
