@@ -1,8 +1,10 @@
 import { Inject } from '@nestjs/common';
 import { BadgeCreateDTO } from 'src/dtos/Badge/Badge.create.dto';
 import { BadgeUpdateDTO } from 'src/dtos/Badge/Badge.update.dto';
-import { GenericException } from 'src/exceptions/Generic.exception';
-import { ServiceException } from 'src/exceptions/Service.exception';
+import { GenericException } from 'src/exceptions/ErrorImplements/Generic.exception';
+import { NotFoundException } from 'src/exceptions/ErrorImplements/NotFound.execption';
+import { ServiceException } from 'src/exceptions/ErrorImplements/Service.exception';
+
 import { IBadgeRepository } from 'src/repositories/BadgeRepository/Badge.interface.repository';
 import { IserviceCRUD } from './serviceContract/service.crud.interface';
 import { createBadgeDTOforModel } from './servicesMappers/Badge.mapper';
@@ -53,7 +55,7 @@ class BadgeService implements IserviceCRUD {
     try {
       const badge = await this.badgeRepository.getById(id);
       if (!badge) {
-        throw new Error('not found!');
+        throw new NotFoundException(id);
       }
       return badge;
     } catch (error) {
@@ -67,7 +69,7 @@ class BadgeService implements IserviceCRUD {
     try {
       const badge = await this.badgeRepository.getById(id);
       if (!badge) {
-        throw new Error('not found!');
+        throw new NotFoundException('not found badge!');
       } else {
         return await this.badgeRepository.deleteById(id);
       }

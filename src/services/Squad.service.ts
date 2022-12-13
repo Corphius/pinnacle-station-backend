@@ -1,8 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { SquadCreateDTO } from 'src/dtos/Squad/Squad.create.dto';
 import { SquadUpdateDTO } from 'src/dtos/Squad/Squad.update.dto';
-import { GenericException } from 'src/exceptions/Generic.exception';
-import { ServiceException } from 'src/exceptions/Service.exception';
+import { GenericException } from 'src/exceptions/ErrorImplements/Generic.exception';
+import { NotFoundException } from 'src/exceptions/ErrorImplements/NotFound.execption';
+import { ServiceException } from 'src/exceptions/ErrorImplements/Service.exception';
+
 import { ISquadRepository } from 'src/repositories/SquadRepository/Squad.interface.repository';
 import { IserviceCRUD } from './serviceContract/service.crud.interface';
 import { createSquadDTOforModel } from './servicesMappers/Squad.mapper';
@@ -17,7 +19,6 @@ class SquadService implements IserviceCRUD {
 
   async create(squadCreateDTO: SquadCreateDTO) {
     try {
-      // fazer validações.
       return await this.squadRepository.create(
         createSquadDTOforModel(squadCreateDTO),
       );
@@ -56,7 +57,7 @@ class SquadService implements IserviceCRUD {
       const squad = await this.squadRepository.getById(id);
 
       if (!squad) {
-        throw new Error('not found!');
+        throw new NotFoundException(id);
       }
       return squad;
     } catch (error) {
@@ -70,7 +71,7 @@ class SquadService implements IserviceCRUD {
     try {
       const squad = await this.getById(id);
       if (!squad) {
-        throw new Error('not found!');
+        throw new NotFoundException('not found squad!');
       } else {
         return await this.squadRepository.deleteById(id);
       }

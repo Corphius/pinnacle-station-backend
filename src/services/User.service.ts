@@ -2,8 +2,11 @@ import { Inject, Injectable } from '@nestjs/common';
 import { hash } from 'bcrypt';
 import { UserCreateDTO } from 'src/dtos/User/User.create.dto';
 import { userEmailDTO } from 'src/dtos/User/User.email.dto';
-import { GenericException } from 'src/exceptions/Generic.exception';
-import { ServiceException } from 'src/exceptions/Service.exception';
+import { GenericException } from 'src/exceptions/ErrorImplements/Generic.exception';
+import { NotFoundException } from 'src/exceptions/ErrorImplements/NotFound.execption';
+import { NotFoundEMailException } from 'src/exceptions/ErrorImplements/NotFoundEmail.exception';
+import { ServiceException } from 'src/exceptions/ErrorImplements/Service.exception';
+
 import { IUserRepository } from 'src/repositories/UserRepository/User.interface.repository';
 import { createUserDTOforModel } from './servicesMappers/User.mapper';
 
@@ -35,7 +38,7 @@ class UserService {
       const user = await this.userRepository.findByEmail(email.email);
 
       if (!user) {
-        throw new Error('not found!');
+        throw new NotFoundEMailException(email.email);
       }
       return user;
     } catch (error) {
@@ -50,7 +53,7 @@ class UserService {
       const user = await this.userRepository.findById(id);
 
       if (!user) {
-        throw new Error('not found!');
+        throw new NotFoundException(id);
       }
       return user;
     } catch (error) {
