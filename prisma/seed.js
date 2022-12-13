@@ -1,6 +1,9 @@
-import { v4 as uuid } from 'uuid';
-import { hash } from 'bcrypt';
-import { PrismaClient } from '@prisma/client';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { v4: uuid } = require('uuid');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { hash } = require('bcrypt');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
@@ -16,18 +19,18 @@ async function main() {
     },
   });
 
-  const matiusa = await prisma.user.upsert({
-    where: { email: 'matiusa@prisma.io' },
+  const user = await prisma.user.upsert({
+    where: { email: 'user@prisma.io' },
     update: {},
     create: {
       id: uuid(),
-      name: 'matiusa',
-      email: 'matiusa@prisma.io',
+      name: 'user',
+      email: 'user@prisma.io',
       password: await hash('omaia', 10),
     },
   });
 
-  console.log({ admin, matiusa });
+  console.log({ admin, user });
 }
 
 main()
