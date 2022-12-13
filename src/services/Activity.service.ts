@@ -2,8 +2,9 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ActivitiesCreateDTO } from 'src/dtos/Activities/Activities.create.dto';
 import { ActivitiesUpdateDTO } from 'src/dtos/Activities/Activities.update.dto';
 import { BadgeOnActivityDTO } from 'src/dtos/BadgeOnActivity/BadgeOnActivity.dto';
-import { GenericException } from 'src/exceptions/Error/Generic.exception';
-import { ServiceException } from 'src/exceptions/Error/Service.exception';
+import { GenericException } from 'src/exceptions/ErrorImplements/Generic.exception';
+import { NotFoundException } from 'src/exceptions/ErrorImplements/NotFound.execption';
+import { ServiceException } from 'src/exceptions/ErrorImplements/Service.exception';
 
 import { IActivityRepository } from 'src/repositories/ActivityRepository/Activity.interface.repository';
 import { IBadgeRepository } from 'src/repositories/BadgeRepository/Badge.interface.repository';
@@ -23,7 +24,6 @@ class ActivityService implements IserviceCRUD {
 
   async create(activityCreateDTO: ActivitiesCreateDTO) {
     try {
-      // fazer validações.
       return await this.activityRepository.create(
         createActivityDTOforModel(activityCreateDTO),
       );
@@ -59,7 +59,7 @@ class ActivityService implements IserviceCRUD {
       const activity = await this.activityRepository.getById(id);
 
       if (!activity) {
-        throw new Error('not found!');
+        throw new NotFoundException(id);
       }
       return activity;
     } catch (error) {
@@ -72,7 +72,7 @@ class ActivityService implements IserviceCRUD {
     try {
       const activity = await this.getById(id);
       if (!activity) {
-        throw new Error('not found!');
+        throw new NotFoundException('not found activity');
       } else {
         return await this.activityRepository.deleteById(id);
       }
@@ -88,13 +88,13 @@ class ActivityService implements IserviceCRUD {
       const activity = await this.activityRepository.getById(data.activity_id);
 
       if (!activity) {
-        throw new Error('activity does not found!');
+        throw new NotFoundException('activity does not found!');
       }
 
       const badge = await this.badgeRepository.getById(data.badge_id);
 
       if (!badge) {
-        throw new Error('badge does not found!');
+        throw new NotFoundException('badge does not found!');
       }
 
       return await this.activityRepository.createBadgeForActivity(data);

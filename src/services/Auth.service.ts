@@ -3,7 +3,7 @@ import { compare } from 'bcrypt';
 import { UserService } from './User.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserCreateDTO } from 'src/dtos/User/User.create.dto';
-import { LoginException } from 'src/exceptions/Error/Login.execption';
+import { LoginException } from 'src/exceptions/ErrorImplements/Login.execption';
 
 @Injectable()
 class AuthService {

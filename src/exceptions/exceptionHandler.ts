@@ -3,12 +3,12 @@ import { BaseExceptionFilter } from '@nestjs/core';
 
 import { getHttpData } from 'src/utils/exceptionHandler.util';
 import { ErrorCodes } from './contracts/ErrorCode.interface';
-import { AlreadyExistsException } from './Error/AlreadyExists.execption';
-import { GenericException } from './Error/Generic.exception';
-import { LoginException } from './Error/Login.execption';
-import { NotFoundException } from './Error/NotFound.execption';
-import { NotFoundEMailException } from './Error/NotFoundEmail.exception';
-import { ServiceException } from './Error/Service.exception';
+import { AlreadyExistsException } from './ErrorImplements/AlreadyExists.execption';
+import { GenericException } from './ErrorImplements/Generic.exception';
+import { LoginException } from './ErrorImplements/Login.execption';
+import { NotFoundException } from './ErrorImplements/NotFound.execption';
+import { NotFoundEMailException } from './ErrorImplements/NotFoundEmail.exception';
+import { ServiceException } from './ErrorImplements/Service.exception';
 
 const buildMessage = (errorCode, params?) => {
   return {

@@ -2,8 +2,9 @@ import { Inject, Injectable } from '@nestjs/common';
 import { BadgeOnTutorialDTO } from 'src/dtos/BadgeOnTutorial/BadgeOnTutorial.dto';
 import { TutorialCreateDTO } from 'src/dtos/Tutorial/Tutorial.create.dto';
 import { TutorialUpdateDTO } from 'src/dtos/Tutorial/Tutorial.update.dto';
-import { GenericException } from 'src/exceptions/Error/Generic.exception';
-import { ServiceException } from 'src/exceptions/Error/Service.exception';
+import { GenericException } from 'src/exceptions/ErrorImplements/Generic.exception';
+import { NotFoundException } from 'src/exceptions/ErrorImplements/NotFound.execption';
+import { ServiceException } from 'src/exceptions/ErrorImplements/Service.exception';
 
 import { IBadgeRepository } from 'src/repositories/BadgeRepository/Badge.interface.repository';
 import { ITutorialRepository } from 'src/repositories/TutorialRepository/Tutorial.interface.repository';
@@ -23,7 +24,6 @@ class TutorialService implements IserviceCRUD {
 
   async create(tutorialCreateDTO: TutorialCreateDTO) {
     try {
-      // fazer validações.
       return await this.tutorialRepository.create(
         createTutorialDTOforModel(tutorialCreateDTO),
       );
@@ -59,7 +59,7 @@ class TutorialService implements IserviceCRUD {
       const tutorial = await this.tutorialRepository.getById(id);
 
       if (!tutorial) {
-        throw new Error('not found!');
+        throw new NotFoundException(id);
       }
       return tutorial;
     } catch (error) {
@@ -72,7 +72,7 @@ class TutorialService implements IserviceCRUD {
     try {
       const tutorial = await this.getById(id);
       if (!tutorial) {
-        throw new Error('not found!');
+        throw new NotFoundException('tutorial does not exits');
       } else {
         return await this.tutorialRepository.deleteById(id);
       }
@@ -88,13 +88,13 @@ class TutorialService implements IserviceCRUD {
       const tutorial = await this.tutorialRepository.getById(data.tutorial_id);
 
       if (!tutorial) {
-        throw new Error('tutorial does not found!');
+        throw new NotFoundException('tutorial does not found!');
       }
 
       const badge = await this.badgeRepository.getById(data.badge_id);
 
       if (!badge) {
-        throw new Error('badge does not found!');
+        throw new NotFoundException('badge does not found!');
       }
 
       return await this.tutorialRepository.createBadgeForTutorial(data);

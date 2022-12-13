@@ -2,10 +2,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import { hash } from 'bcrypt';
 import { UserCreateDTO } from 'src/dtos/User/User.create.dto';
 import { userEmailDTO } from 'src/dtos/User/User.email.dto';
-import { GenericException } from 'src/exceptions/Error/Generic.exception';
-import { NotFoundException } from 'src/exceptions/Error/NotFound.execption';
-import { NotFoundEMailException } from 'src/exceptions/Error/NotFoundEmail.exception';
-import { ServiceException } from 'src/exceptions/Error/Service.exception';
+import { GenericException } from 'src/exceptions/ErrorImplements/Generic.exception';
+import { NotFoundException } from 'src/exceptions/ErrorImplements/NotFound.execption';
+import { NotFoundEMailException } from 'src/exceptions/ErrorImplements/NotFoundEmail.exception';
+import { ServiceException } from 'src/exceptions/ErrorImplements/Service.exception';
 
 import { IUserRepository } from 'src/repositories/UserRepository/User.interface.repository';
 import { createUserDTOforModel } from './servicesMappers/User.mapper';

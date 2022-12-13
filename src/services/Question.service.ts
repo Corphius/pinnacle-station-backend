@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { QuestionCreateDTO } from 'src/dtos/Question/Question.create.dto';
 import { QuestionUpdateDTO } from 'src/dtos/Question/Question.update.dto';
-import { GenericException } from 'src/exceptions/Error/Generic.exception';
-import { ServiceException } from 'src/exceptions/Error/Service.exception';
+import { GenericException } from 'src/exceptions/ErrorImplements/Generic.exception';
+import { NotFoundException } from 'src/exceptions/ErrorImplements/NotFound.execption';
+import { ServiceException } from 'src/exceptions/ErrorImplements/Service.exception';
 
 import { IQuestionRepository } from 'src/repositories/QuestionRepository/Question.interface.repository';
 import { IserviceCRUD } from './serviceContract/service.crud.interface';
@@ -19,7 +20,6 @@ class QuestionService implements IserviceCRUD {
 
   async create(questionCreateDTO: QuestionCreateDTO) {
     try {
-      // fazer validações.
       return await this.questionRepository.create(
         createQuestionDTOforModel(questionCreateDTO),
       );
@@ -58,7 +58,7 @@ class QuestionService implements IserviceCRUD {
       const tutorial = await this.questionRepository.getById(id);
 
       if (!tutorial) {
-        throw new Error('not found!');
+        throw new NotFoundException(id);
       }
       return tutorial;
     } catch (error) {
@@ -71,7 +71,7 @@ class QuestionService implements IserviceCRUD {
     try {
       const tutorial = await this.getById(id);
       if (!tutorial) {
-        throw new Error('not found!');
+        throw new NotFoundException('not found tutorial!');
       } else {
         return await this.questionRepository.deleteById(id);
       }
