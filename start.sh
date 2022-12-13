@@ -8,7 +8,7 @@ yarn prisma:generate
 yarn migrate:deploy
 
 # run seeds for users database
-yarn prisma db seed
+yarn prisma:seed
 
 # Run application
 node dist/main.js
