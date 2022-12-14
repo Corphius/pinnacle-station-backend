@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, getSchemaPath } from '@nestjs/swagger';
 import { IsNotEmpty, IsUUID } from 'class-validator';
 
 class ActivityREQUESTbadge {

@@ -7,7 +7,13 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiInternalServerErrorResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 import { IsPublic } from 'src/decorators/is-public.decorator';
 import { LocalAuthGuard } from 'src/guards/local-auth.guard';
 import { AuthService } from 'src/services/Auth.service';
@@ -21,6 +27,18 @@ class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   @HttpCode(HttpStatus.OK)
+  @ApiOkResponse({
+    description: 'OK',
+  })
+  @ApiInternalServerErrorResponse({
+    description: 'Internal Server Error',
+  })
+  @ApiNotFoundResponse({
+    description: 'Not Found',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized',
+  })
   async login(@Request() @Body() req: UserREQUESTAuth) {
     return await this.authService.login(req);
   }
