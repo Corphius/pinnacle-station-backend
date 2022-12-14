@@ -4,6 +4,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { ActivityModule } from './modules/Activity.module';
 import { AuthModule } from './modules/Auth.module';
 import { BadgeModule } from './modules/Badge.module';
+import { HealthModule } from './modules/health.module';
 import { PrismaModule } from './modules/Prisma.module';
 import { QuestionModule } from './modules/Question.module';
 
@@ -21,6 +22,7 @@ import { UserModule } from './modules/User.module';
     BadgeModule,
     AuthModule,
     UserModule,
+    HealthModule,
   ],
   providers: [
     {
