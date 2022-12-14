@@ -1,9 +1,6 @@
 #!/bin/sh
 set -e 
 
-# Generate prisma client for database connection at application
-yarn prisma:generate
-
 # Run database migrations by prisma
 yarn migrate:deploy
 

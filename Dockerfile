@@ -26,6 +26,8 @@ COPY --from=builder --chown=node:node /home/node/dist/ ./dist/
 COPY --from=builder --chown=node:node /home/node/prisma/ ./prisma/
 COPY --from=builder --chown=node:node /home/node/start.sh ./
 
+RUN  prisma generate
+ 
 RUN chmod +x /home/node/start.sh
 
 ENTRYPOINT ["/home/node/start.sh"]
